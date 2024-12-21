@@ -1,18 +1,27 @@
-def main():
-    print("Welcome to my site.")
-    print("Please select your Topic.")
-    print("1. Uppercase")
-    print("2. Lowercase")
-    choice = input("Enter your choice (1 or 2): ")
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/convert', methods=['POST'])
+def convert():
+    choice = request.form.get('choice')
+    word = request.form.get('word')
 
     if choice == '1':
-        word = input("Enter a word to convert to Uppercase: ")
-        print("Output: ", word.upper())
+        result = word.upper()
+        message = "Converted to Uppercase:"
     elif choice == '2':
-        word = input("Enter a word to convert to Lowercase: ")
-        print("Output: ", word.lower())
+        result = word.lower()
+        message = "Converted to Lowercase:"
     else:
-        print("Invalid choice. Please select 1 or 2.")
+        result = "Invalid choice"
+        message = "Error:"
 
-if __name__ == "__main__":
-    main()
+    return render_template('index.html', result=result, message=message)
+
+if __name__ == '__main__':
+    app.run(debug=True)

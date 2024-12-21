@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Converter</title>
+</head>
+<body>
+    <h1>Welcome to my site</h1>
+    <p>Please select your topic and enter a word:</p>
+    
+    <form action="/convert" method="post">
+        <label>
+            <input type="radio" name="choice" value="1"> Uppercase
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="choice" value="2"> Lowercase
+        </label>
+        <br><br>
+        <label for="word">Enter your word:</label>
+        <input type="text" id="word" name="word" required>
+        <br><br>
+        <button type="submit">Convert</button>
+    </form>
+
+    {% if result %}
+        <h2>{{ message }}</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
